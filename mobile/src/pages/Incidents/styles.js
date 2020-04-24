@@ -53,6 +53,12 @@ export default StyleSheet.create({
     color: '#41414d',
     fontWeight: 'bold',
   },
+  incidentnome: {
+    width:150,
+    fontSize: 14,
+    color: '#41414d',
+    fontWeight: 'bold',
+  },
 
   incidentValue: {
     marginTop: 8,
@@ -63,7 +69,7 @@ export default StyleSheet.create({
   },
   profile: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'center'
   },
 
@@ -97,4 +103,8 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  seta:{
+    width:'19%',
+    alignItems:'flex-end'
+},
 });

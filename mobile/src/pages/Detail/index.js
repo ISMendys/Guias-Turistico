@@ -6,14 +6,13 @@ import { View, Text, Image, TouchableOpacity, Linking } from 'react-native';
 import profile from '../../assets/profile.png';
 
 import styles from './styles';
-import { FlatList } from 'react-native-gesture-handler';
 
 export default function Detail() {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const incident = route.params.incident;
-  const message = `Olá ${incident.name},gostaria que voce fosse meu guia "${incident.title}" com o valor de ${Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(incident.value)}`;
+  const guia = route.params.guia;
+  const message = `Olá ${guia.name},gostaria que voce fosse meu guia "${guia.nome}" com o valor de ${Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(guia.id)}`;
 
   function navigateBack() {
     navigation.goBack()
@@ -21,7 +20,7 @@ export default function Detail() {
 
 
   function sendWhatsapp() {
-    Linking.openURL(`whatsapp://send?phone=${incident.whatsapp}&text=${message}`);
+    Linking.openURL(`whatsapp://send?phone=${guia.whatsapp}&text=${message}`);
   }
 
   return (
@@ -50,7 +49,7 @@ export default function Detail() {
 
         <View style={styles.category}>
           <Text style={styles.incidentProperty}>Categoria:  </Text>
-          <Text style={styles.incidentValue}>Guia Regional{incident.title}</Text>
+          <Text style={styles.incidentValue}>Guia Regional{guia.descricao}</Text>
         </View>
 
         <Text style={styles.incidentProperty}>Descrição:</Text>
@@ -58,12 +57,12 @@ export default function Detail() {
         
         <View style={styles.category2}>
           <Text style={styles.incidentProperty}>NC:  </Text>
-          <Text style={styles.incidentValue}>00.000000.00-0{incident.title}</Text>
+          <Text style={styles.incidentValue}>00.000000.00-0{guia.nc}</Text>
         </View>
 
         <View style={styles.category}>
           <Text style={styles.incidentProperty}>Data de validade:  </Text>
-          <Text style={styles.incidentValue}>00/00/0000{incident.title}</Text>
+          <Text style={styles.incidentValue}>00/00/0000{guia.id}</Text>
         </View>
 
         <View style={styles.actions}>

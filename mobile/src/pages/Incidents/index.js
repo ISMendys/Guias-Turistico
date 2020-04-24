@@ -12,7 +12,7 @@ import logoImg from '../../assets/logo.png';
 import styles from './styles';
 
 export default function Incidents() {
-  const [incidents, setIncidents] = useState([1,2]);
+  const [guias, setIncidents] = useState([]);
   const [total, setTotal] = useState(0);
 
   const [page, setPage] = useState(1);
@@ -20,8 +20,8 @@ export default function Incidents() {
 
   const navigation = useNavigation();
 
-  function navigateToDetail(incident) {
-    navigation.navigate('Detail', { incident });
+  function navigateToDetail(guia) {
+    navigation.navigate('Detail', { guia });
   }
 
   async function loadIncidents() {
@@ -29,21 +29,24 @@ export default function Incidents() {
       return;
     }
 
-    if (total > 0 && incidents.length === total) {
+    if (total > 0 && guias.length === total) {
       return;
     }
 
     setLoading(true);
 
-    const response = await api.get('incidents', {
+    const response = await api.get('guias', {
       params: { page }
     });
 
-    setIncidents([...incidents, ...response.data]);
+    setIncidents([...guias, ...response.data]);
     setTotal(response.headers['x-total-count']);
     setPage(page + 1);
     setLoading(false);
   }
+  function navigateBack() {
+    navigation.goBack()
+  };
 
   useEffect(() => {
     loadIncidents();
@@ -51,52 +54,58 @@ export default function Incidents() {
  
   return (
     <View style={styles.container}>
+ 
+
       <View style={styles.header}>
         <Image source={logoImg} />
+        
         <Text style={styles.headerText}>
           Total de <Text style={styles.headerTextBold}>{total} Guias</Text>.
         </Text>
+              
+       <TouchableOpacity onPress={navigateBack} style={styles.seta}>
+        <Feather name="arrow-left" size={28} color="#E82041" />
+      </TouchableOpacity>
       </View>
-
+   
       <Text style={styles.title}>Bem-vindo!</Text>
       <Text style={styles.description}>Escolha um dos guias abaixo para te acompanhar!</Text>
 
       <FlatList
-        data={incidents}
+        data={guias}
         style={styles.incidentList}
-        keyExtractor={incident => String(incident.id)}
+        keyExtractor={guia => String(guia.id)}
         // showsVerticalScrollIndicator={false}
         onEndReached={loadIncidents}
         onEndReachedThreshold={0.2}
-        renderItem={({ item: incident }) => (
+        renderItem={({ item: guia }) => (
           <View style={styles.incident}>
 
             <View style={styles.profile}>
-              <View>
+              <View style={{width:50}}>
                 <Image source={profile} />
               </View>
-              <Text style={styles.incidentProperty}>Nome Sobrenome</Text>
-              <Text style={styles.incidentValue}>{incident.name}</Text>
+              <Text style={styles.incidentnome}>{guia.nome}</Text>
             </View>
 
             <View style={styles.idiomas}>
               <Text style={styles.incidentProperty}>Idiomas:  </Text>
-              <Text style={styles.incidentValue}>{incident.title}Ingles,Espanhol</Text>
+              <Text style={styles.incidentValue}>{guia.idiomas}</Text>
             </View>
 
             <View style={styles.categoria}>
               <Text style={styles.incidentProperty}>Categoria:  </Text>
-              <Text style={styles.incidentValue}>{incident.cotegory}Atrativos Naturais</Text>
+              <Text style={styles.incidentValue}>{guia.descricao}</Text>
             </View>
 
             <View style={styles.nc}>
               <Text style={styles.incidentProperty}>NC:  </Text>
-              <Text style={styles.incidentValue}>{incident.value}00.000000.00-0</Text>
+              <Text style={styles.incidentValue}>{guia.nc}</Text>
             </View>
 
             <TouchableOpacity 
               style={styles.detailsButton} 
-              onPress={() => navigateToDetail(incident)}
+              onPress={() => navigateToDetail(guia)}
             >
               <Text style={styles.detailsButtonText}>Ver mais detalhes</Text>
               <Feather name="arrow-right" size={16} color="#E02041" />            
