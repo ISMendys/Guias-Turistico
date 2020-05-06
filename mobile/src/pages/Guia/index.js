@@ -1,15 +1,48 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState} from 'react';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { View, ScrollView , Image, Text, TouchableOpacity,KeyboardAvoidingView,TextInput} from 'react-native';
+import { View, ScrollView , Image, Text, TouchableOpacity,Alert,TextInput} from 'react-native';
 
 import profile from '../../assets/profile.png';
 
 import logoImg from '../../assets/profile.png';
 
 import styles from './styles';
+import api from '../../services/api';
 
 export default function Guia() {
+      
+  const [nome, setNome] = useState('');
+  const [sobrenome, setSobrenome] = useState('');
+  const [email, setEmail] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [telefone, setTelefone] = useState('');
+  const [nc, setNc] = useState('');
+  const [descricao, setDescricao] = useState('');
+
+
+  async function handleRegister(){
+    
+    const data={
+      nome,
+      email,
+      cpf,
+      nc,
+      descricao,
+      telefone,
+      idiomas:'br'
+    };
+
+    console.log(data)
+    try{
+    const response = await api.post('guias', data);
+    Alert.alert('CADASTRO REALIZADO','Guia cadastrado com sucesso')
+    }catch{
+      console.log('error')
+      Alert.alert('ERRO','Erro ao cadastrar!')
+    }
+  }
+
 
   const navigation = useNavigation();
 
@@ -38,7 +71,9 @@ export default function Guia() {
                 style={styles.input}
                 placeholder="Nome:"
                 autoCorrect={false}
-                onChangeText={()=>{}}/>
+                value={nome}
+                onChangeText={text => setNome(text)} 
+                />
             </View>
   
             <View>     
@@ -46,11 +81,11 @@ export default function Guia() {
                 style={styles.input}
                 placeholder="Sobrenome:"
                 autoCorrect={false}
-                onChangeText={()=>{}}/>
+                value={sobrenome}
+                onChangeText={text => setSobrenome(text)}/>
             </View>
           </View>
-  
-       </View>
+          </View>
        <View style={styles.midInput}>
   
         <View>     
@@ -59,33 +94,37 @@ export default function Guia() {
             <TextInput 
               style={styles.midInputs}
               autoCorrect={false}
-              onChangeText={()=>{}}/>
+              value={email}
+              onChangeText={text => setEmail(text)}/>
               <Text style={styles.asterisco}>*</Text>
           </View>
           </View>
-  
+
+          
           <View>     
           <Text style={styles.textInput}>CPF:</Text>
           <View style={styles.midInputsBox}>
             <TextInput 
               style={styles.midInputs}
               autoCorrect={false}
-              onChangeText={()=>{}}/>
+              value={cpf}
+              onChangeText={text => setCpf(text)}/>
               <Text style={styles.asterisco}>*</Text>
           </View>
           </View>
-  
+
           <View>     
           <Text style={styles.textInput}>Telefone:</Text>
           <View style={styles.midInputsBox}>
             <TextInput 
               style={styles.midInputs}
               autoCorrect={false}
-              onChangeText={()=>{}}/>
+              value={telefone}
+                onChangeText={text => setTelefone(text)}/>
               <Text style={styles.asterisco}>*</Text>
           </View>
           </View>
-  
+
           <View>     
           <Text style={styles.textInput}>NC:</Text>
           <View style={styles.midInputsBox}>
@@ -93,7 +132,8 @@ export default function Guia() {
               style={styles.midInputs}
               placeholder="00.00000.00-0"
               autoCorrect={false}
-              onChangeText={()=>{}}/>
+              value={nc}
+              onChangeText={text => setNc(text)}/>
               <Text style={styles.asterisco}>*</Text>
           </View>
           </View>
@@ -105,16 +145,21 @@ export default function Guia() {
               style={styles.midInputs}
               
               autoCorrect={false}
-              onChangeText={()=>{}}/>
+              value={descricao}
+              onChangeText={text => setDescricao(text)}/>
               <Text style={styles.asterisco}>*</Text>
           </View>
           </View>
 
+
           <View style={styles.actions}>
-          <TouchableOpacity style={styles.action} onPress={()=>{}}>
+          <TouchableOpacity 
+            style={styles.action} 
+            onPress={handleRegister}>
             <Text style={styles.actionText}>Cadastrar</Text>
           </TouchableOpacity>
           </View>
+
 
           <Text style={styles.shoter}>Preencha todos os campos para concluir seu cadastro, os campos com (<Text style={styles.asterisco}>*</Text>) são obrigatorios.</Text>
          
@@ -122,5 +167,5 @@ export default function Guia() {
       </View>
       </ScrollView>
     </View>
-  )
-  ;}
+  );
+  }
