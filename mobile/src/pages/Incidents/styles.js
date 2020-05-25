@@ -54,8 +54,8 @@ export default StyleSheet.create({
     fontWeight: 'bold',
   },
   incidentnome: {
-    width:150,
-    fontSize: 14,
+    width:110,
+    fontSize: 18,
     color: '#41414d',
     fontWeight: 'bold',
   },

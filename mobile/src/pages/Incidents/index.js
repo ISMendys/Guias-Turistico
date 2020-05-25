@@ -82,7 +82,7 @@ export default function Incidents() {
           <View style={styles.incident}>
 
             <View style={styles.profile}>
-              <View style={{width:50}}>
+              <View style={{width:170}}>
                 <Image source={profile} />
               </View>
               <Text style={styles.incidentnome}>{guia.nome}</Text>

@@ -9,9 +9,12 @@ import logoImg from '../../assets/profile.png';
 
 import styles from './styles';
 import api from '../../services/api';
+import Camera from '../../pages/Camera';
 
 export default function Guia() {
-      
+
+
+
   const [nome, setNome] = useState('');
   const [sobrenome, setSobrenome] = useState('');
   const [email, setEmail] = useState('');
@@ -49,6 +52,7 @@ export default function Guia() {
   function navigateBack() {
     navigation.goBack()
   };
+
 
   return (
       <View style={styles.container}>
@@ -159,7 +163,6 @@ export default function Guia() {
             <Text style={styles.actionText}>Cadastrar</Text>
           </TouchableOpacity>
           </View>
-
 
           <Text style={styles.shoter}>Preencha todos os campos para concluir seu cadastro, os campos com (<Text style={styles.asterisco}>*</Text>) são obrigatorios.</Text>
          
