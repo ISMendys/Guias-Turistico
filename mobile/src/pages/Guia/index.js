@@ -9,7 +9,6 @@ import logoImg from '../../assets/profile.png';
 
 import styles from './styles';
 import api from '../../services/api';
-import Camera from '../../pages/Camera';
 
 export default function Guia() {
 

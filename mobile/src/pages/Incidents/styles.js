@@ -36,9 +36,14 @@ export default StyleSheet.create({
     lineHeight: 24,
     color: '#737380'
   },
+  subtitle: {
+    fontSize: 15,
+    lineHeight: 18,
+    color: '#737380'
+  },
 
   incidentList: {
-    marginTop: 32,
+    marginTop: 15,
   },
 
   incident: {

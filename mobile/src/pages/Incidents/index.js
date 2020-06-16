@@ -69,13 +69,13 @@ export default function Incidents() {
       </View>
    
       <Text style={styles.title}>Bem-vindo!</Text>
-      <Text style={styles.description}>Escolha um dos guias abaixo para te acompanhar!</Text>
+      <Text style={styles.subtitle}>Escolha um dos guias abaixo para te acompanhar!</Text>
 
       <FlatList
         data={guias}
         style={styles.incidentList}
         keyExtractor={guia => String(guia.id)}
-        // showsVerticalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
         onEndReached={loadIncidents}
         onEndReachedThreshold={0.2}
         renderItem={({ item: guia }) => (

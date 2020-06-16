@@ -1,7 +1,7 @@
 import React from 'react';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { View, Text, Image, TouchableOpacity, Linking } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Linking,ScrollView } from 'react-native';
 
 import profile from '../../assets/profile.png';
 
@@ -24,6 +24,7 @@ export default function Detail() {
   }
 
   return (
+    <ScrollView>
     <View style={styles.container}>
       <View style={styles.header}>
 
@@ -48,21 +49,21 @@ export default function Detail() {
         <Text style={styles.idiomas}>Espanhol - Fluente</Text>
 
         <View style={styles.category}>
-          <Text style={styles.incidentProperty}>Categoria:  </Text>
-          <Text style={styles.incidentValue}>Guia Regional{guia.descricao}</Text>
+          <Text style={styles.incidentProperty}>Categoria:  </Text>gua ty
+          <Text style={styles.incidentValue}>{guia.descricao}</Text>
         </View>
 
         <Text style={styles.incidentProperty}>Descrição:</Text>
-        <Text style={styles.idiomas}>Conheço toda região de salvador todos os monumentos e locais historicos. Falo muito bem todas as linguas citadas acima e escolho o roteiro de acordo com o grupo de turistas que estou levando.</Text>
+        <Text style={styles.idiomas}>{guia.descricao}</Text>
         
         <View style={styles.category2}>
           <Text style={styles.incidentProperty}>NC:  </Text>
-          <Text style={styles.incidentValue}>00.000000.00-0{guia.nc}</Text>
+          <Text style={styles.incidentValue}>{guia.nc}</Text>
         </View>
 
         <View style={styles.category}>
           <Text style={styles.incidentProperty}>Data de validade:  </Text>
-          <Text style={styles.incidentValue}>00/00/0000{guia.id}</Text>
+          <Text style={styles.incidentValue}>{guia.id}</Text>
         </View>
 
         <View style={styles.actions}>
@@ -80,5 +81,6 @@ export default function Detail() {
       </View>
       
     </View>
+    </ScrollView>
   );
 }
